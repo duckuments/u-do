@@ -1,0 +1,44 @@
+{% extends "dashbordbase.html" %}
+{% load static %}
+
+{% block title %}
+edit profile
+{% endblock %}
+
+{% block content %}
+<div class="container xl:max-w-[calc(100%-394px)] lg:max-w-[calc(100%-288px)] md:max-w-[calc(100%-212)] sm:max-w-[calc(100%-100px)] max-w-[calc(100%-50px)]  mx-auto">
+        <div class="flex flex-col justify-center items-center">
+        <div class="avatar">
+            <div class="w-32 rounded-full ring ring-neutral">
+              <img src="{% if user.ImgName %}{{user.ImgName.url}}{% else %}'/media/userImage/default.jpg{% endif %}" alt="user-profile-photo">
+            </div>
+        </div>
+        <div class="divider divider-neutral">my information</div>
+        <form class="" action="{% url 'account-editProfile' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-8">
+          {{form.first_name.label}}
+          {{form.first_name}}
+          </div>
+          <div class="mb-8">
+          {{form.last_name.label}}
+          {{form.last_name}}
+          </div>
+          <div class="mb-8"> 
+          {{form.username.label}}
+          {{form.username}}
+          {{form.username.help_text}}
+          </div>
+          <div class="mb-8">
+          {{form.Information.label}}
+          {{form.Information}}
+          </div>
+          <div class="mb-8">
+          {{form.ImgName.label}}
+          {{form.ImgName}}
+          </div>
+            <button class="w-full btn btn-neutral capitalize rounded-none" type="submit">change my informations</button>
+        </form>
+        </div>
+</div>
+{% endblock %}

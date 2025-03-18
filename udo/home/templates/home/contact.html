@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block 'title' %}
+contact
+{% endblock %}
+
+
+{% block 'content' %}
+
+
+{% if messages %}
+
+{% for message in messages %}
+<div role="alert" class="alert alert-{{message.tags}} bg-primary">
+  <svg xmlns="http://www.w3.org/2000/svg" class="text-neutral h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span class="text-neutral">{{message}}</span>
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="min-h-screen flex flex-col justify-center text-left">
+  <h1 class="xl:text-2xl lg:text-2xl md:text-xl sm:text-lg text-lg font-bold capitalize mb-2">[ Contact to our team ]</h1>
+  <p class="mb-2 text-sm">you can send message to our team with this form</p>
+  <div class="divider"></div>
+    <form method="POST" action="{% url 'home-contact' %}" class="flex flex-col space-y-4" >
+      {% csrf_token %}
+      {{forms.fullName}}
+      {{forms.fullName.error}}
+      {{forms.email}}
+      {{forms.email.error}}
+      {{forms.subject}}
+      {{forms.subject.error}}
+      {{forms.message}}
+      {{forms.message.error}}
+      <button type="submit"  class="btn btn-secondary rounded-none text-primary btn-sm sm:btn-sm md:btn-md lg:btn-md xl:btn-md w-fit">send message</button>
+    </form>
+</div>
+{% endblock %}

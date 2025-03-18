@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}
+About
+{% endblock %}
+
+{% block 'content' %}
+<div class="min-h-screen flex flex-col justify-center text-left">
+  <h1 class="xl:text-2xl lg:text-2xl md:text-xl sm:text-lg text-lg font-bold capitalize mb-4">About Us</h1>
+  <p class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium mb-4">Welcome to UDo, your ultimate solution for seamless project and task management. Our platform is designed to help developers, teams, and freelancers stay organized, track progress, and collaborate effectively.</p>
+  <h2 class="xl:text-2xl lg:text-2xl md:text-xl sm:text-lg text-lg font-bold capitalize mb-4">Our Mission</h2>
+  <p class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium mb-4">At UDo, we believe that productivity should be simple, efficient, and accessible. Whether you're managing a small project or handling a large-scale development workflow, our tools empower you to stay in control and achieve your goals with ease.</p>
+  <h2 class="xl:text-2xl lg:text-2xl md:text-xl sm:text-lg text-lg font-bold capitalize mb-4">What We Offer</h2>
+  <div class="mb-4">
+    <ul class="list-disc list-inside">
+      <li><span class="font-bold">Task & Project Management</span> : Organize, track, and prioritize tasks efficiently.</li> 
+      <li><span class="font-bold">Real-Time Collaboration</span> : Work together with your team and stay in sync.</li>
+      <li><span class="font-bold">Progress Monitoring</span> : Keep track of milestones and deadlines.</li>
+      <li><span class="font-bold">Seamless Workflow</span> : Streamline your development process with an intuitive interface.</li>
+    </ul>
+  </div>
+  <div class="divider"></div>
+  <p class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium mb-4">Join us and take your project management to the next level with UDo! 🚀</p>
+  <div class="">
+    <a href="{% url 'account-login' %}" id="changeTextButton" class="btn btn-secondary rounded-none text-primary">ok , lets try</a>
+  </div>
+</div>
+{% endblock %}

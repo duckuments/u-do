@@ -1,0 +1,49 @@
+{% extends "dashbordbase.html" %}
+
+{% block title %}
+create new project
+{% endblock %}
+{% block content %}
+<div class="container xl:max-w-[calc(100%-394px)] lg:max-w-[calc(100%-288px)] md:max-w-[calc(100%-212)] sm:max-w-[calc(100%-100px)] max-w-[calc(100%-50px)]  mx-auto">
+  <div class="flex flex-col justify-center items-center p-4">
+    <h1 class="font-bold text-xl capitalize">[ create new project ]</h1>
+  </div>
+  <div class="divider"></div>
+  <form class="" action="{% url 'dashbord-newProject' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-4">
+      {{form.Name.label}}
+      {{form.Name}}
+    </div>
+    <div class="mb-4">
+      {{form.Description.label}} 
+      {{form.Description}}
+    </div>
+    <div class="mb-4">
+      {{form.StartDate.label}}
+      {{form.StartDate}}
+    </div>
+    <div class="mb-4">
+      {{form.EndDate.label}}
+      {{form.EndDate}}
+    </div>
+    <div class="mb-4">
+      {{form.Status.label}}
+      {{form.Status}}
+    </div>
+    <div class="mb-4">
+      {{form.Members.label}}
+      {{form.Members}}
+    </div>
+    <div class="mb-4">
+      {{form.Admin.label}}
+      {{form.Admin}}
+    </div>
+    <div class="mb-4">
+      {{form.slug.label}}
+      {{form.slug}}
+    </div>
+    <button class="w-full btn btn-neutral capitalize rounded-none" type="submit">create new project</button>
+  </form>
+</div>
+{% endblock content %}

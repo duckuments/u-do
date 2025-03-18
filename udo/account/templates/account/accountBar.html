@@ -1,0 +1,22 @@
+<div class="flex flex-row justify-between border rounded-none border-neutral">
+    <div class="avatar">
+        <div class="w-8 rounded-full">
+            <img src="{{ user.ImgName.url }}"/>
+        </div>
+    </div>
+    <div class="">
+        <h1 class="font-bold text-xs">{{ user.get_full_name }}</h1>
+        <p class="font-light text-xs">{{ user.email }}</p>
+    </div>
+    <div class="">
+        <div class="dropdown dropdown-top dropdown-center">
+      <button class="btn border border-neutral btn-xs" role="button" tabindex="0">x</button>
+            <ul tabindex="0"
+                class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                <li><a href="{{user.get_absolute_url}}">profile</a></li>
+                <li><a href="{% url 'account-editProfile' %}">edit profile</a></li>
+                <li><a href="{% url 'account-logout' %}">logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

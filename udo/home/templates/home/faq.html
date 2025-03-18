@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+
+{% block 'title' %}
+faq
+{% endblock %}
+
+{% block 'content' %}
+<div class="min-h-screen flex flex-col justify-center text-left">
+  <h1 class="xl:text-2xl lg:text-2xl md:text-xl sm:text-lg text-lg font-bold capitalize mb-4">[ FAQ ]</h1>
+  <p class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium mb-4">Frequently Asked Questions</p>
+  <div class="divider"></div>
+  <div class="collapse collapse-arrow bg-primary border-2 border-neutral rounded-none mb-4">
+    <input type="radio" name="my-accordion-2" checked="checked">
+    <div class="collapse-title xl:text-lg lg:text-lg md:text-sm sm:text-sm mb-4 font-bold">what is UDO ?</div>
+    <div class="collapse-content">
+      <p class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium">UDO is a project and task management platform designed to help teams, freelancers, and developers organize their workflow, track progress, and collaborate efficiently.</p>
+    </div>
+  </div>
+  <div class="collapse collapse-arrow bg-primary border-2 border-neutral rounded-none mb-4">
+    <input type="radio" name="my-accordion-2">
+    <div class="collapse-title xl:text-lg lg:text-lg md:text-sm sm:text-sm  mb-4 font-medium">How do I create a new project?</div>
+    <div class="collapse-content">
+      <p class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium">To create a new project, go to your dashboard, click on the "Create Project" button, fill in the required details, and submit the form. Your project will be added instantly.</p>
+    </div>
+  </div>
+  <div class="collapse collapse-arrow bg-primary border-2 border-neutral rounded-none mb-4">
+    <input type="radio" name="my-accordion-2">
+    <div class="collapse-title xl:text-lg lg:text-lg md:text-sm sm:text-sm  mb-4 font-medium">Can I add team members to my project?</div>
+    <div class="collapse-content">
+      <p class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium">Yes! You can invite team members by entering their user ID in the project settings. They will receive a request to join your project and can accept it from their dashboard.</p>
+    </div>
+  </div>
+  <div class="collapse collapse-arrow bg-primary border-2 border-neutral rounded-none mb-4">
+    <input type="radio" name="my-accordion-2">
+    <div class="collapse-title xl:text-lg lg:text-lg md:text-sm sm:text-sm  mb-4 font-medium">Is UDO free to use?</div>
+    <div class="collapse-content">
+      <p class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium">Yes, UDO offers a free version with essential features. We also provide premium plans with advanced capabilities for larger teams and businesses.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

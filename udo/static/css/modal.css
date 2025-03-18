@@ -1,0 +1,32 @@
+
+.bubble {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    background-color: #211C1B;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.bubble img {
+    border-radius: 9999px;
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+}
+
+.bubble .delete-btn {
+    background-color: transparent;
+    color: #CFBA8E;
+    border: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}

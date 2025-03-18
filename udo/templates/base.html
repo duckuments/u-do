@@ -1,0 +1,71 @@
+{% load static %}
+{% load render_partial %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block 'title'%}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block 'header_ref'%}{% endblock %}
+  </head>
+  <body class="bg-primary">
+    <div class="container xl:max-w-[calc(100%-394px)] lg:max-w-[calc(100%-288px)] md:max-w-[calc(100%-212)] sm:max-w-[calc(100%-100px)] max-w-[calc(100%-50px)]  mx-auto">
+      <!--navbar-->
+      <div class="navbar bg-primary">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+              </svg>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-primary z-[1] mt-3 w-52 p-2 shadow">
+              <li><a href="{% url 'home-contact' %}" class="rounded-none">contact</a></li>
+              <li><a href="{% url 'home-faq' %}" class="rounded-none">faq</a></li>
+              <li><a href="{% url 'home-about' %}" class="rounded-none">about</a></li>
+            </ul>
+          </div>
+          <a href="{% url 'home-index' %}" class="btn btn-ghost font-bold text-2xl rounded-none">U-DO</a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li><a href="{% url 'home-contact' %}" class="rounded-none">contact</a></li>
+            <li><a href="{% url 'home-faq' %}" class="rounded-none">faq</a></li>
+            <li><a href="{% url 'home-about' %}" class="rounded-none">about</a></li>
+          </ul>
+        </div>
+        <div class="navbar-end">
+          {% if request.user.is_authenticated %}
+          {% render_partial 'account.views.indexAccountBar' %}
+          {% else %}
+          <a class="btn btn-secondary rounded-none text-primary btn-sm sm:btn-sm md:btn-md lg:btn-md xl:btn-md hover:border-neutral hover:bg-primary hover:text-neutral" href="{% url 'account-signup' %}">try now</a>
+          {% endif %}
+        </div>
+      </div>
+
+      {% block 'content'%}{% endblock %}
+      <div class="divider">by
+        <a href="https://github.com/HirmanX" class="link link-hover">Hirmaan R.</a></div>
+      <footer class="footer bg-primary text-white-content p-10">
+        <nav>
+          <h6 class="footer-title">Services</h6>
+          <a class="link link-hover" href="">api</a>
+          <a class="link link-hover" href="{% url 'home-document' %}">document</a>
+        </nav>
+        <nav>
+          <h6 class="footer-title">Company</h6>
+          <a class="link link-hover" href="{% url 'home-about' %}">about</a>
+          <a class="link link-hover" href="{% url 'home-contact' %}">Contact</a>
+          <a class="link link-hover" href="{% url 'home-faq' %}">faq</a>
+        </nav>
+        <nav>
+          <h6 class="footer-title">Legal</h6>
+          <a class="link link-hover" href="{% url 'home-privacy' %}">Privacy policy</a>
+        </nav>
+      </footer>
+    </div>
+    {% block 'footer_ref' %}{% endblock %}
+  </body>
+</html>
+

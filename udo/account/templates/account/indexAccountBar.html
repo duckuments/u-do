@@ -1,0 +1,17 @@
+<div class="">
+  <div class="dropdown dropdown-hover">
+    <div tabindex="0" role="button" class="btn m-1 btn-primary">
+      <div class="avatar">
+        <div class="w-12 rounded-full">
+          <img src="{{user.ImgName.url}}" />
+      </div>
+    </div>
+
+    </div>
+    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-37 p-2 shadow-sm">
+      <li><a href="{{user.get_absolute_url}}">profile</a></li>
+      <li><a href="{% url 'account-editProfile' %}">edit profile</a></li>
+      <li><a href="{% url 'account-logout' %}">logout</a></li>
+    </ul>
+  </div>
+</div>

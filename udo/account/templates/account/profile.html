@@ -1,0 +1,81 @@
+{% extends "dashbordbase.html" %}
+{% load static %}
+
+{% block title %}
+    profile
+{% endblock %}
+{% block content %}
+    <div class=" lg:max-w-[calc(100%-288px)] md:max-w-[calc(100%-212)] sm:max-w-[calc(100%-100px)] max-w-[calc(100%-50px)] mx-auto lg:mr-0 md:mr-0 xl:mx-auto sm:mr-0">
+        <div class="w-full space-y-4">
+
+            <div class=" w-full flex items-center">
+                <div class="stats bg-primary border-neutral border w-full p-2">
+
+                    <div class="stat">
+                        <div class="stat-figure text-secondary">
+                        </div>
+                        <div class="stat-title p-1">end project</div>
+                        <div class="stat-value text-secondary p-1">{{ countProjects }}</div>
+                        <div class="stat-desc text-secondary">{{ projects.count }} projects remaining</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-figure text-secondary">
+                            <div class="avatar">
+                                <div class="w-24 rounded-full border border-neutral">
+                                  <img src="{{user.ImgName.url}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-value">{{ taskPercent }}%</div>
+                        <div class="stat-title">Tasks done</div>
+                        <div class="stat-desc text-secondary">{{ tasks.count }} tasks remaining</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tablist" class="tabs tabs-bordered mt-5">
+            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="information" checked="checked">
+            <div role="tabpanel" class="tab-content p-10">{{ user.Information }}</div>
+
+            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="tasks">
+            <div role="tabpanel" class="tab-content space-y-4">
+                {% for task in tasks %}
+                    <div class="flex flex-col space-y-4">
+                        <div class="flex flex-row rounded-none justify-between border border-neutral p-3">
+                            <a href="{{ task.get_absolute_url }}"
+                               class="font-bold text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg hover:link">{{ task.Title }}</a>
+                            <p class="text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg hidden sm:block md:block lg:block xl:block">
+                            {{task.Category}}</p>
+                            <p class="font-light text-accent text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg">{{ task.Status }}</p>
+                            <p class="text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg">{{ task.CreateDate }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="projects">
+            <div role="tabpanel" class="tab-content pt-4">
+                <div class="flex flex-col space-y-4">
+
+                    {% for project in projects %}
+                        <div class="flex flex-col space-y-4">
+                            <div class="flex flex-col space-y-4">
+                                <div class="flex flex-row rounded-none justify-between border border-neutral p-3">
+                                    <a href="{{ project.get_absolute_url }}"
+                                       class="font-bold text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg hover:link">{{ project.Name }}</a>
+
+                                    <a href="{{project.Admin.first.get_absolute_url}}"
+                                       class="hover:link text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg hidden sm:block md:block lg:block xl:block">{{project.Admin.first.username}}</a>
+                                    <p class="font-light text-accent text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg">{{ project.Status }}</p>
+
+                                    <p class="text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg">{{ project.CreateDate }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

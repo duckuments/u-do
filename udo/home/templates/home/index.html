@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}Home{% endblock %}
+
+{% block 'content' %}
+
+
+{% if messages %}
+
+{% for message in messages %}
+<div role="alert" class="alert alert-{{message.tags}} bg-primary">
+  <svg xmlns="http://www.w3.org/2000/svg" class="text-neutral h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span class="text-neutral">{{message}}</span>
+</div>
+{% endfor %}
+{% endif %}
+
+
+
+<div class="min-h-screen flex flex-col justify-center text-left">
+  <h1 id="title" class="xl:text-2xl lg:text-2xl md:text-xl sm:text-lg text-lg font-bold capitalize mb-4"></h1>
+  <p id="description" class="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-medium mb-4"></p>
+  <div class="">
+    <a id="changeTextButton" class="btn border-neutral bg-primary rounded-none text-neutral hover:btn-secondary">tell me more</a>
+    <a id="heroLoginButton" href="{% if request.user.is_authenticated %}
+   {% url 'account-signup' %} 
+    {% else %}
+    {% url 'dashbord-allprojects' %}
+    {% endif %}
+    " class="btn btn-secondary rounded-none text-primary hover:border-neutral hover:bg-primary hover:text-neutral">ok, lets go</a>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block 'footer_ref' %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

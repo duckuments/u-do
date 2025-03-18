@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}
+signup
+{% endblock %}
+
+{% block 'content' %}
+<div class="min-h-screen flex flex-col justify-center text-left">
+  <h1 class="xl:text-2xl lg:text-2xl md:text-xl sm:text-lg text-lg font-bold capitalize mb-2">[ lets create
+                an
+                account for you ]</h1>
+  <p class="mb-2 text-sm">you have an account?<a href="{% url 'account-login' %}" class="link decoration-slice">login</a></p>
+  <div class="divider"></div>
+  <div class="flex flex-col space-y-4">
+    <form class="flex flex-col space-y-4" method="POST" action="{% url 'account-signup' %}">
+      {% csrf_token %}
+      {{form.first_name}}
+      {{form.first_name.error}}
+      {{form.last_name}}
+      {{form.last_name.error}}
+      {{form.username}}
+      <span class="text-sm">{{form.username.help_text}}</span>
+      {{form.username.error}}
+      {{form.email}}
+      {{form.email.error}}
+      {{form.password}}
+      {{form.password.error}}
+      {{form.confirm_password}}
+      {{form.confirm_password.error}}
+      <div class="flex gap-2 items-center">
+        <input type="checkbox" class="checkbox lg:checkbox-md xl:checkbox-md md:checkbox-md sm:checkbox-sm checkbox-sm rounded-none border-neutral bg-primary" required>
+        <p class="text-sm">By signing up, you agree to our
+          <a href="{% url 'home-privacy' %}" class="link">Privacy Policy</a></p>
+      </div>
+      <button class="btn btn-secondary rounded-none text-primary btn-sm sm:btn-sm md:btn-md lg:btn-md xl:btn-md w-fit">create an account</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

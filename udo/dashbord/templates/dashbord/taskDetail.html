@@ -1,0 +1,59 @@
+{% extends "dashbordbase.html" %}
+{% load static %}
+
+{% block title %}
+    all projects
+{% endblock %}
+
+{% block content %}
+<div class="xl:max-w-[calc(100%-394px)] lg:max-w-[calc(100%-288px)] md:max-w-[calc(100%-212)] sm:max-w-[calc(100%-100px)] max-w-[calc(100%-50px)] mx-auto lg:mr-0 md:mr-0 xl:mx-auto sm:mr-0">
+  <div class="w-full space-y-4">
+    <div class="breadcrumbs flex text-neutral text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm">
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="{% url 'dashbord-alltasks' %}">Tasks</a></li>
+        <li>{{task.Title}}</li>
+      </ul>
+    </div>
+    <div class=" w-full flex items-center justify-center">
+      <div class="min-w-0 flex-1">
+        <h2 class=" font-bold text-accent sm:truncate text-xl sm:tracking-tight md:text-3xl lg:text-4xl xl:text-4xl mb-4">{{task.Title}}</h2>
+      </div>
+      <div class="flex flex-row">
+        <div class="pr-4">
+          <a href="{% url 'dashbord-newTask' %}" class="btn btn-neutral rounded-none btn-sm sm:btn-md md:btn-md lg:btn-md xl:btn-md">add new task</a>
+          <a href="{% url 'dashbord-editTask' slug=task.slug %}" class="btn btn-neutral rounded-none btn-sm sm:btn-md md:btn-md lg:btn-md xl:btn-md">edit</a>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="tablist" class="tabs tabs-bordered">
+    <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="information" checked="checked">
+    <div role="tabpanel" class="tab-content p-10">{{task.Description}}</div>
+    <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="members">
+    <div role="tabpanel" class="tab-content p-10 ">
+      {% for member in task.Members.all %}
+      <div class="flex flex-row rounded-none justify-between border border-neutral p-3 items-center">
+        <div class="avatar">
+          <div class="w-8 md:w-12 lg:w-12 xl:w-12 rounded-full">
+            <img src="{{member.ImgName.url}}">
+          </div>
+        </div>
+        <h1 class="font-bold text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg ">{{member.get_full_name}}</h1>
+        <p class="text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg hidden sm:block md:block lg:block xl:block">{{task.Category}}</p>
+        <div class="rating rating-sm hidden md:flex lg:flex xl:flex">
+            <input type="radio" name="rating-3" class="mask mask-star-2 bg-green-500" disabled="" {% if member.Rating == 1 %}checked="checked"{% endif %}>
+            <input type="radio" name="rating-3" class="mask mask-star-2 bg-green-500" disabled="" {% if member.Rating == 2 %}checked="checked"{% endif %}>
+            <input type="radio" name="rating-3" class="mask mask-star-2 bg-green-500" disabled=""{% if member.Rating == 3 %}checked="checked"{% endif %}>
+            <input type="radio" name="rating-3" class="mask mask-star-2 bg-green-500" disabled="" {% if member.Rating == 4 %}checked="checked"{% endif %}>
+            <input type="radio" name="rating-3" class="mask mask-star-2 bg-green-500" disabled=""{% if member.Rating == 5 %}checked="checked"{% endif %}>
+        </div>
+        <a href="{{member.get_absolute_url}}" class="hover:link text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg ">{{member.username}}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

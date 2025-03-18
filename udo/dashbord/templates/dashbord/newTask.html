@@ -1,0 +1,57 @@
+{% extends "dashbordbase.html" %}
+
+{% block title %}
+create new task 
+{% endblock %}
+{% block content %}
+<div class="container xl:max-w-[calc(100%-394px)] lg:max-w-[calc(100%-288px)] md:max-w-[calc(100%-212)] sm:max-w-[calc(100%-100px)] max-w-[calc(100%-50px)]  mx-auto">
+  <div class="flex flex-col justify-center items-center p-4">
+    <h1 class="font-bold text-xl capitalize">[ create new task ]</h1>
+  </div>
+  <div class="divider"></div>
+  <form class="" method="POST" action="{% url 'dashbord-newTask' %}">
+    {% csrf_token %}
+    <div class="mb-4">
+      {{form.Title.label}}
+      {{form.Title}}
+    </div>
+    <div class="mb-4">
+      {{form.Description.label}} 
+      {{form.Description}}
+    </div>
+    <div class="mb-4">
+      {{form.StartDate.label}}
+      {{form.StartDate}}
+    </div>
+    <div class="mb-4">
+      {{form.EndDate.label}}
+      {{form.EndDate}}
+    </div>
+    <div class="mb-4">
+      {{form.Status.label}}
+      {{form.Status}}
+    </div>
+    <div class="mb-4">
+      {{form.Members.label}}
+      {{form.Members}}
+    </div>
+    <div class="mb-4">
+      {{form.Admin.label}}
+      {{form.Admin}}
+    </div>
+    <div class="mb-4">
+      {{form.ParentProject.label}}
+      {{form.ParentProject}}
+    </div>
+    <div class="mb-4">
+      {{form.Category.label}}
+      {{form.Category}}
+    </div>
+    <div class="mb-4">
+      {{form.slug.label}}
+      {{form.slug}}
+    </div>
+    <button class="w-full btn btn-neutral capitalize rounded-none" type="submit">create new task</button>
+  </form>
+</div>
+{% endblock content %}
