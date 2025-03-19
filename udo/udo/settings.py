@@ -93,6 +93,25 @@ DATABASES = {
     }
 }
 
+# INFO:  you can connect mongodb databse to the project with this code : 
+# after use this code you should run these commands in terminal :
+# - python manage.py makemigrations
+# - python manage.py migrate.
+
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'djongo',
+#       'NAME': 'your_database_name',  # Replace with your DB name
+#        'ENFORCE_SCHEMA': False,  # Disable strict schema enforcement
+#        'CLIENT': {
+#            'host': 'mongodb://localhost:27017/',  # MongoDB URL
+#            'username': 'your_username',  # Optional
+#            'password': 'your_password',  # Optional
+#            'authSource': 'admin',  # Optional, for authentication
+#        }
+#    }
+#}
+
 # set custom user model :
 AUTH_USER_MODEL = 'account.User'
 
