@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+from account.models import FriendshipModel
 
 class ProjectModelForm(forms.ModelForm):
     class Meta : 
@@ -33,7 +34,14 @@ class ProjectModelForm(forms.ModelForm):
             "Admin":forms.SelectMultiple(attrs={
                 "class":"w-full bg-primary border-neutral border rounded-none p-2",
             }),
-        }
+        } 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+        if user:
+            self.fields['Members'].queryset = FriendshipModel.get_friends(user)
+            self.fields['Admin'].queryset = FriendshipModel.get_friends(user)
 
 class TaskModelForm(forms.ModelForm):
     class Meta : 
@@ -71,3 +79,11 @@ class TaskModelForm(forms.ModelForm):
                 "class":"w-full bg-primary border-neutral border rounded-none p-2",
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+        if user:
+            self.fields['Members'].queryset = FriendshipModel.get_friends(user)
+            self.fields['Admin'].queryset = FriendshipModel.get_friends(user)

@@ -1,0 +1,30 @@
+{% extends "dashbordbase.html" %}
+{% load static %}
+
+{% block title %}
+my requests
+{% endblock %}
+
+{% block content %}
+<div class=" container xl:max-w-[calc(100%-394px)] lg:max-w-[calc(100%-288px)] md:max-w-[calc(100%-212)] sm:max-w-[calc(100%-100px)] max-w-[calc(100%-50px)]  mx-auto">
+  <div class="flex flex-col justify-center items-center">
+    <h1 class="font-bold text-xl mb-5 captalize">[ my income requests ]</h1>
+  </div>
+  <div class="border-neutral border">
+    {% for request in requests %}
+    <div class="flex m-3 flex-row rounded-lg justify-between border border-neutral p-3 items-center">
+      <h1 class="font-bold text-lg">from :</h1>
+      <div class="avatar">
+        <div class="w-8 md:w-12 lg:w-12 xl:w-12 rounded-full">
+          <img src="{{request.user1.ImgName.url}}">
+        </div>
+      </div>
+      <h1 class="font-bold text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg ">{{request.user1.get_full_name}}</h1><!--send request fullname-->
+      <a href="{{request.user1.get_absolute.url}}" class="hover:link text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg ">{{request.user1.username}}</a>
+      <a href="{% url 'account-request-response' request_code=request.request_code action=1 %}" class="btn btn-neutral btn-xs">Accept</a>
+      <a href="{% url 'account-request-response' request_code=request.request_code action=0 %}" class="btn btn-neutral btn-xs">Cancel</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

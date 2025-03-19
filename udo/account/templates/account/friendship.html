@@ -1,0 +1,36 @@
+{% extends "dashbordbase.html" %}
+{% load static %}
+
+{% block title %}
+friend
+{% endblock %}
+
+{% block content %}
+<div class=" container xl:max-w-[calc(100%-394px)] lg:max-w-[calc(100%-288px)] md:max-w-[calc(100%-212)] sm:max-w-[calc(100%-100px)] max-w-[calc(100%-50px)]  mx-auto">
+  <div class="flex flex-col justify-center items-center">
+    <h1 class="font-bold text-xl mb-5">[ request to new friend ]</h1>
+    <form method="GET" action="{% url 'account-request' %}">
+      <div class="join">
+        <input type="text" name="q" class="input bg-primary border border-neutral join-item" placeholder="username" value="{{ request.GET.q }}">
+        <button type="submit" class="btn join-item rounded-r-full btn-primary border border-neutral">search</button>
+      </div>
+    </form>
+  </div>
+  <div class="border-neutral border">
+    {% for member in members %}
+    {% if not member.id  == user %}
+    <div class="flex m-3 flex-row rounded-lg justify-between border border-neutral p-3 items-center">
+      <div class="avatar">
+        <div class="w-8 md:w-12 lg:w-12 xl:w-12 rounded-full">
+          <img src="{% if member.ImgName %}{{member.ImgName.url}}{% endif %}">
+        </div>
+      </div>
+      <h1 class="font-bold text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg ">{{member.get_full_name}}</h1>
+      <a href="{{member.get_absolute_url}}" class="hover:link text-xs sm:text-sm md:text-sm lg:text-lg xl:text-lg ">{{member.username}}</a>
+      <a href="{% url 'account-send-request' username=member.username %}" class="btn btn-neutral btn-xs">request</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

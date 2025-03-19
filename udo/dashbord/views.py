@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.utils.text import slugify
 from django.contrib import messages
 
+
 class AllProjects(LoginRequiredMixin,ListView):
     login_url = '/account/login/' 
     redirect_field_name = 'next'
@@ -72,6 +73,11 @@ class CreateNewProject(LoginRequiredMixin,CreateView):
         form.instance.slug = slugify(form.instance.Name)
         return super().form_valid(form)
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 class CreateNewTask(LoginRequiredMixin,CreateView):
     model = TaskModel
     template_name = 'newTask.html'
@@ -80,6 +86,11 @@ class CreateNewTask(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.slug = slugify(form.instance.Title)
         return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 class EditTaskView(UpdateView):
     template_name = "editTask.html"
@@ -105,6 +116,11 @@ class EditTaskView(UpdateView):
     def get_success_url(self):
         return reverse('dashbord-alltasks')
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 class EditProjectView(UpdateView):
     template_name = "editProject.html"
     model = ProjectModel
@@ -129,6 +145,11 @@ class EditProjectView(UpdateView):
 
     def get_success_url(self):
         return reverse('dashbord-allprojects')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 
 

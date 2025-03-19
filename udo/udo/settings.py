@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'account',
     'dashbord',
     'django_render_partial',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -133,8 +135,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
     BASE_DIR / 'home'/ 'static',
-    BASE_DIR / 'dashbord'/'static',
-    BASE_DIR /'account'/'static'
 ]
 
 # Default primary key field type

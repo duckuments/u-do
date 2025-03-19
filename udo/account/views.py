@@ -1,15 +1,18 @@
+from email import message
+from enum import member
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 from .forms import SignInModelForm, LoginForm,EditProfileModelForm
-from .models import User
+from .models import User,FriendshipModel
 from django.utils.crypto import get_random_string
 from django.contrib.auth import login, logout
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin # if: user is login show the page else: redirect user to login page.
 from django.http import Http404
 from django.views.generic.edit import UpdateView
+from django.db.models import Q
 
 # send email function
 from django.core.mail import EmailMessage 
@@ -193,3 +196,59 @@ def indexAccountBar(request):
         'user':current_user
     }
     return render(request,'indexAccountbar.html',context)
+
+
+def getFriend(request):
+    query = request.GET.get('q','').strip()
+    members = ""
+    if query:  
+        members = User.objects.filter(username__icontains=query)
+
+    context = {
+        'members':members,
+        'user':request.user.id
+    }
+    return render(request, "friendship.html",context)
+
+def sendRequest(request,username):
+    current_user = User.objects.filter(id=request.user.id).first()
+    requested_user = User.objects.filter(username__iexact=username).first()
+    friendRequest = FriendshipModel()
+
+    try:
+        friendRequest.user1 = current_user
+        friendRequest.user2 = requested_user
+        friendRequest.save()
+        messages.add_message(request,messages.SUCCESS,"your request sended")
+    except Exception as e:
+        print(e)
+        messages.add_message(request,messages.ERROR,"something went wrong")
+
+    return redirect(reverse('account-request'))
+
+def myRequest(request):
+    user = User.objects.filter(id=request.user.id).first()
+    user_request = FriendshipModel.objects.filter(Q(user2=user) & Q(is_accepted=False)).all()
+    context = {
+        'requests' : user_request
+    }
+    return render(request,'all_request.html',context)
+
+
+def requestRespose(request,request_code,action):
+    current_request = FriendshipModel.objects.filter(request_code__iexact=request_code).first()
+    if action == "1" :
+        current_request.is_accepted = True
+        current_request.request_code = get_random_string(30)
+        current_request.save()
+        messages.add_message(request,messages.SUCCESS,"you accept the request")
+        return redirect(reverse('account-myrequest'))
+    elif action == "0" : 
+        current_request.is_accepted = False 
+        current_request.request_code = get_random_string(30)
+        current_request.save()
+        messages.add_message(request,messages.SUCCESS,"you cancel the request")
+        return redirect(reverse('account-myrequest'))
+    else:
+        messages.add_message(request,messages.ERROR,"something went wrong")
+        return redirect(reverse('account-myrequest'))
